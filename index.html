@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>My Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #333;
+        }
+        .add-note-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .note {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+        .note input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .note button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        .note button.delete-btn {
+            background-color: #dc3545;
+        }
+        #notes-list {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>My Notes</h1>
+            <button id="addNoteBtn" class="add-note-btn">+</button>
+        </div>
+        <div id="notes-list"></div>
+    </div>
+
+    <script>
+        let addNoteBtn = document.getElementById("addNoteBtn");
+        let notesList = document.getElementById("notes-list");
+
+        addNoteBtn.addEventListener("click", () => {
+            let note = document.createElement("div");
+            note.classList.add("note");
+
+            let input = document.createElement("input");
+            input.type = "text";
+            input.placeholder = "Enter your note here";
+            note.appendChild(input);
+
+            let saveBtn = document.createElement("button");
+            saveBtn.textContent = "Save";
+            note.appendChild(saveBtn);
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.classList.add("delete-btn");
+            note.appendChild(deleteBtn);
+
+            notesList.appendChild(note);
+
+            saveBtn.addEventListener("click", () => {
+                let savedText = document.createElement("p");
+                savedText.textContent = input.value;
+                note.innerHTML = ""; 
+                note.appendChild(savedText);
+                note.appendChild(deleteBtn); 
+            });
+
+            deleteBtn.addEventListener("click", () => {
+                notesList.removeChild(note);
+            });
+        });
+    </script>
+</body>
+</html>
